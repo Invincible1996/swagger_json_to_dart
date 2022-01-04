@@ -1,0 +1,10 @@
+name: swagger_json_to_dart
+version: 0.0.1
+homepage: "https://github.com/Invincible1996"
+
+environment:
+  sdk: ">=2.10.0 <3.0.0"
+dependencies:
+  shared_preferences: any
+  dio: any
+dev_dependencies:
