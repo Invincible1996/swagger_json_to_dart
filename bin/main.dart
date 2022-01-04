@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'service.dart';
+import 'struct.dart';
 import 'util/file_util.dart';
 import 'util/string_util.dart';
 
@@ -42,6 +44,7 @@ void generateService() async {
   serviceBuffer.write("// GENERATED CODE - DO NOT MODIFY BY HAND\n");
   serviceBuffer.write("import './struct.dart';\n");
   serviceBuffer.write("import 'base_controller.dart';\n");
+  serviceBuffer.write("import 'api_response.dart';\n");
   serviceBuffer.write("///@author\n");
   serviceBuffer.write("///@date\n");
   serviceBuffer.write("///@desc\n");
@@ -58,19 +61,24 @@ void generateService() async {
     var functionName = (key as String).getFuncName();
 
     var responseType = getResponseType(value);
+    serviceBuffer.write("\t///\n");
+    serviceBuffer.write("\t///@path $key\n");
+    serviceBuffer.write("\t///@desc ${value['post']['summary']}\n");
+    serviceBuffer.write("\t///\n");
     if (request != null) {
-      serviceBuffer.write("\t///@path $key\n");
-      serviceBuffer.write("\t///@desc ${value['post']['summary']}\n");
-      serviceBuffer.write("\tFuture<$responseType> $functionName($request input) async {\n");
-      serviceBuffer.write("\tvar res =  await post('$key', data: input.toJson());\n");
+      serviceBuffer.write("\tFuture<ApiResponse<$responseType>> $functionName($request input) async {\n");
+      serviceBuffer.write("\t\ttry{\n");
+      serviceBuffer.write("\t\tvar res =  await post('$key', data: input.toJson());\n");
     } else {
-      serviceBuffer.write("\t///@path $key\n");
-      serviceBuffer.write("\t///@desc ${value['post']['summary']}\n");
-      serviceBuffer.write("\tFuture<$responseType> $functionName() async {\n");
-      serviceBuffer.write("\tvar res =  await post('$key');\n");
+      serviceBuffer.write("\tFuture<ApiResponse<$responseType>> $functionName() async {\n");
+      serviceBuffer.write("\t\ttry{\n");
+      serviceBuffer.write("\t\tvar res =  await post('$key');\n");
     }
-    serviceBuffer.write("\tvar out = $responseType.fromJson(res.data);\n");
-    serviceBuffer.write('\treturn out;\n');
+    serviceBuffer.write("\t\tvar out = $responseType.fromJson(res.data['data']);\n");
+    serviceBuffer.write("\t\treturn ApiResponse.completed(out,res.data['code'],res.data['message']);\n");
+    serviceBuffer.write("\t\t}catch(e){\n");
+    serviceBuffer.write("\t\treturn ApiResponse.error(e);\n");
+    serviceBuffer.write("\t\t}\n");
     serviceBuffer.write('\t}\n\n');
   });
 
@@ -136,6 +144,7 @@ Map getMapByRef(String ref) {
 
 ///
 /// @desc
+///
 void transferMapToDartClass2(dataClassName, Map properties2) {
   buffer.write("\n\n/// @author\n");
   buffer.write("/// @date\n");
@@ -281,6 +290,9 @@ transferRequestToDartClass(List<dynamic> params) {
   }
 }
 
+///
+///
+///
 Future<String> createDirectory(String dir) async {
   var directory = await Directory('$dir').create(recursive: true);
   return directory.path;
@@ -324,6 +336,6 @@ String transferType(dynamic value) {
 test() {
   Future.delayed(Duration(microseconds: 5000), () async {
     // var loginRes = await UserController().login(LoginReq(password: '1234567890', username: 'wade12345678'));
-    // print(loginRes.code);
+    // print(loginRes.data.username);
   });
 }

@@ -10,7 +10,6 @@ class BaseController {
   Dio dio = Dio();
 
   BaseController() {
-    print('init');
     dio.options.baseUrl = 'http://127.0.0.1:8000';
   }
 
