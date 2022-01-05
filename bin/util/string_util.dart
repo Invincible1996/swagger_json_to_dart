@@ -8,18 +8,98 @@ extension StringUtils on String {
     return this.split("/")[2];
   }
 
+  ///
+  /// @desc 获取实体类类型
+  ///
   String getDataTypeWithoutPrefix() {
-    return this.split("/")[2].split('.')[1];
+    // return this.split("/")[2].split('.')[1];
+    return this.split("/")[2];
   }
 
+  ///
+  ///@desc 获取方法名称
+  ///
   String getFuncName() {
     var list = this.split('/');
     return list[list.length - 1];
   }
-}
 
-extension StringExtension on String {
-  hello() {
-    print('hello,$this');
+  ///
+  /// @desc 替换指定字符串 «string»
+  ///
+  String replaceCharacter() {
+    return this.replaceAll("«string»", '');
+  }
+
+  ///
+  /// @desc 首字母大写
+  ///
+  String firstLetterUppercase() {
+    return '${this.substring(0, 1).toUpperCase()}${this.substring(1)}';
+  }
+
+  ///
+  /// @desc 下划线替换并大些
+  ///
+  String replaceLine() {
+    if (this.contains("-")) {
+      var list = this.split('-');
+      var newList = list
+          .asMap()
+          .map(
+            (key, value) => MapEntry(
+              key,
+              value.firstLetterUppercase(),
+            ),
+          )
+          .values
+          .toList();
+      var str = '';
+      newList.forEach((element) {
+        str += element;
+      });
+      return str;
+    } else {
+      return this;
+    }
+  }
+
+  ///
+  /// @desc 下划线替换并大些
+  ///
+  String replaceUnderLine() {
+    if (this.contains("_")) {
+      var list = this.split('_');
+      var newList = list
+          .asMap()
+          .map(
+            (key, value) => MapEntry(
+              key,
+              key != 0 ? value.firstLetterUppercase() : value,
+            ),
+          )
+          .values
+          .toList();
+      var str = '';
+      newList.forEach((element) {
+        str += element;
+      });
+      return str;
+    } else {
+      return this;
+    }
+  }
+
+  String getResponseType(value) {
+    var responseType;
+    Map<String, dynamic> resSchema = value['post']['responses']['200']['schema'];
+    if (resSchema.containsKey('allOf')) {
+      //
+      responseType = (resSchema['allOf'][1]['properties']['data']['\$ref'] as String).getDataTypeWithoutPrefix();
+    } else {
+      //
+      responseType = (resSchema['\$ref'] as String).getDataTypeWithoutPrefix().replaceCharacter();
+    }
+    return responseType ?? 'Null';
   }
 }
