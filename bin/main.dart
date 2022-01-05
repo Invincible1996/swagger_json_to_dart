@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import 'util/code_format.dart';
 import 'util/file_util.dart';
 import 'util/generate_service.dart';
 import 'util/generate_struct.dart';
@@ -92,9 +93,10 @@ fetchData(String requestUrl) async {
     // final stringData = await response.transform(utf8.decoder).join();
     jsonMaps = response.data;
     generateService();
-    parseJson();
+    generateStruct();
   } finally {
     client.close();
+    CodeFormat.formatCode();
   }
 }
 
@@ -104,7 +106,7 @@ void generateService() async {
   FileUtil.createFile('./lib/model/service.dart', content);
 }
 
-void parseJson() {
+void generateStruct() {
   var struct = GenerateStruct(buffer, jsonMaps);
   var content = struct.generateStruct();
   FileUtil.createFile('./lib/model/struct.dart', content);

@@ -1,4 +1,4 @@
-  import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 
 ///
 /// @date: 2022/1/4 15:57
@@ -19,5 +19,3 @@ class BaseController {
 
   get() {}
 }
-
-  

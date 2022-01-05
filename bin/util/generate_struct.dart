@@ -19,9 +19,11 @@ class GenerateStruct {
 
   String generateStruct() {
     buffer.write("// GENERATED CODE - DO NOT MODIFY BY HAND${'\n' * 3}");
-    buffer.write("// **************************************************************************\n");
+    buffer.write(
+        "// **************************************************************************\n");
     buffer.write("// GenerateStruct\n");
-    buffer.write("// **************************************************************************\n");
+    buffer.write(
+        "// **************************************************************************\n");
 
     var paths = jsonMaps['paths'].keys.toList();
     for (var item in paths) {
@@ -29,7 +31,8 @@ class GenerateStruct {
       transferRequestToDartClass(jsonMaps['paths'][item]['post']['parameters']);
 
       /// 解析出参
-      transferResponseToDartClass(jsonMaps['paths'][item]['post']['responses']['200']);
+      transferResponseToDartClass(
+          jsonMaps['paths'][item]['post']['responses']['200']);
     }
     return buffer.toString();
   }
@@ -61,14 +64,19 @@ class GenerateStruct {
       // 判断value 是否含有ref 属性
       // 数组
       if (value['type'] == 'array') {
-        arrayClassName = (value['items']['\$ref'] as String).getDataTypeWithoutPrefix();
+        arrayClassName =
+            (value['items']['\$ref'] as String).getDataTypeWithoutPrefix();
         arrayMapRef = getMapByRef(value['items']['\$ref']);
-        otherCSString += "\n\t\tif(json['$key'] != null){\n\t\t$key = [];\n\t\tjson['$key'].forEach((v){\n\t\t\t$key.add($arrayClassName.fromJson(v));\n\t\t});\n\t}";
-        toJsonString += "\n\t\tif($key !=null){\n\t\tmap['$key']=$key.map((v)=>v.toJson()).toList();\n\t\t}";
+        otherCSString +=
+            "\n\t\tif(json['$key'] != null){\n\t\t$key = [];\n\t\tjson['$key'].forEach((v){\n\t\t\t$key.add($arrayClassName.fromJson(v));\n\t\t});\n\t}";
+        toJsonString +=
+            "\n\t\tif($key !=null){\n\t\tmap['$key']=$key.map((v)=>v.toJson()).toList();\n\t\t}";
       } else if (checkMasHasRefProperty(value)) {
         refClassName = (value['\$ref'] as String).getDataTypeWithoutPrefix();
-        otherCSString += "\n\t\t$key = json['$key'] != null ? $refClassName.fromJson(json['$key']) : null;";
-        toJsonString += "\n\t\tif(this.$key != null){\n\t\tmap['$key'] = this.$key.toJson();\n\t\t}\n";
+        otherCSString +=
+            "\n\t\t$key = json['$key'] != null ? $refClassName.fromJson(json['$key']) : null;";
+        toJsonString +=
+            "\n\t\tif(this.$key != null){\n\t\tmap['$key'] = this.$key.toJson();\n\t\t}\n";
         mapByRef = getMapByRef(value['\$ref']);
       } else {
         otherCSString += "\n\t\t$key = json['$key'];";
@@ -139,7 +147,8 @@ class GenerateStruct {
 
       properties.forEach((key, value) {
         buffer.write("\n\t//${value['description']}");
-        buffer.write("\n\t${(value['type'] as String).firstLetterUppercase()} $key;");
+        buffer.write(
+            "\n\t${(value['type'] as String).firstLetterUppercase()} $key;");
 
         // 变量拼接
         varStringBuffer.write("this.$key,");
@@ -188,16 +197,20 @@ class GenerateStruct {
   /// 解析返回参数生成Struct
   transferResponseToDartClass(res) {
     if (res['schema']['allOf'] != null) {
-      var ref2 = res['schema']['allOf'][1]['properties']['data']['\$ref'].split('/')[2];
+      var ref2 = res['schema']['allOf'][1]['properties']['data']['\$ref']
+          .split('/')[2];
       Map properties2 = jsonMaps['definitions'][ref2]['properties'];
       // 生成 data 实体
       var dataClassName = ref2.split('.')[1];
       transferMapToDartClass2(dataClassName, properties2);
     } else {
       // 只有一层
-      var className = (res['schema']['\$ref'] as String).getDataTypeWithoutPrefix();
+      var className =
+          (res['schema']['\$ref'] as String).getDataTypeWithoutPrefix();
 
-      Map properties = jsonMaps['definitions'][(res['schema']['\$ref'] as String).getDataTypeWithPrefix()]['properties'];
+      Map properties = jsonMaps['definitions']
+              [(res['schema']['\$ref'] as String).getDataTypeWithPrefix()]
+          ['properties'];
 
       var newClassName = '';
 

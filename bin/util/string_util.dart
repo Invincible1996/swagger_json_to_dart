@@ -92,13 +92,18 @@ extension StringUtils on String {
 
   String getResponseType(value) {
     var responseType;
-    Map<String, dynamic> resSchema = value['post']['responses']['200']['schema'];
+    Map<String, dynamic> resSchema =
+        value['post']['responses']['200']['schema'];
     if (resSchema.containsKey('allOf')) {
       //
-      responseType = (resSchema['allOf'][1]['properties']['data']['\$ref'] as String).getDataTypeWithoutPrefix();
+      responseType =
+          (resSchema['allOf'][1]['properties']['data']['\$ref'] as String)
+              .getDataTypeWithoutPrefix();
     } else {
       //
-      responseType = (resSchema['\$ref'] as String).getDataTypeWithoutPrefix().replaceCharacter();
+      responseType = (resSchema['\$ref'] as String)
+          .getDataTypeWithoutPrefix()
+          .replaceCharacter();
     }
     return responseType ?? 'Null';
   }
