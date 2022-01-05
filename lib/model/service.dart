@@ -7,7 +7,7 @@ import 'api_response.dart';
 // **************************************************************************
 
 /// @author kevindeMacBook-Pro.local 
-/// @date 2022-01-05 15:00:20.259354
+/// @date 2022-01-05 15:42:28.319863
 /// @desc EmployeeAccountController
 class EmployeeAccountController extends BaseController {
 	///
@@ -25,7 +25,7 @@ class EmployeeAccountController extends BaseController {
 	}
 }
 /// @author kevindeMacBook-Pro.local 
-/// @date 2022-01-05 15:00:20.266855
+/// @date 2022-01-05 15:42:28.326790
 /// @desc StudentAccountController
 class StudentAccountController extends BaseController {
 	///
@@ -43,7 +43,7 @@ class StudentAccountController extends BaseController {
 	}
 }
 /// @author kevindeMacBook-Pro.local 
-/// @date 2022-01-05 15:00:20.266965
+/// @date 2022-01-05 15:42:28.326900
 /// @desc TeacherAccountController
 class TeacherAccountController extends BaseController {
 	///

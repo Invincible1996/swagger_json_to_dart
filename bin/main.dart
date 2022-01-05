@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+
 import 'util/file_util.dart';
 import 'util/generate_service.dart';
 import 'util/generate_struct.dart';
@@ -10,8 +12,13 @@ Map<String, dynamic> jsonMaps = {};
 var buffer = StringBuffer();
 
 void main() async {
+  // get console input
+  print('请输入swagger json url（不输入选择默认地址）');
+  var defaultUrl = 'http://192.168.11.41:19960/v2/api-docs';
+  var requestUrl = stdin.readLineSync(encoding: utf8);
+  print(requestUrl);
   createBasicFile();
-  fetchData();
+  fetchData(requestUrl.length > 0 ? requestUrl : defaultUrl);
 }
 
 createBasicFile() {
@@ -66,18 +73,24 @@ class BaseController {
   FileUtil.createFile('./lib/model/base_controller.dart', controllerContent);
 }
 
-fetchData() async {
+fetchData(String requestUrl) async {
   // http://127.0.0.1:8000/swagger/doc.json
+  // http://192.168.11.41:19960/v2/api-docs
   var client = HttpClient();
   try {
     // HttpClientRequest request = await client.get('127.0.0.1', 8000, '/swagger/doc.json');
-    HttpClientRequest request = await client.get('192.168.11.41', 19960, '/v2/api-docs');
+    // HttpClientRequest request = await client.get('192.168.11.41', 19960, '/v2/api-docs');
     // Optionally set up headers...
     // Optionally write to the request object...
-    HttpClientResponse response = await request.close();
+    // HttpClientResponse response = await request.close();
     // Process the response
-    final stringData = await response.transform(utf8.decoder).join();
-    jsonMaps = json.decode(stringData);
+
+    Dio dio = Dio();
+    var response = await dio.get(requestUrl);
+    print(response);
+
+    // final stringData = await response.transform(utf8.decoder).join();
+    jsonMaps = response.data;
     generateService();
     parseJson();
   } finally {
