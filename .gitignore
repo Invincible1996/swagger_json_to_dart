@@ -2,3 +2,4 @@
 .idea
 .packages
 pubspec.lock
+lib/service/http

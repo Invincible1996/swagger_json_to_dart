@@ -5,7 +5,7 @@
 class ApiResponse<T> implements Exception {
   Status status;
   T data;
-  int code;
+  String code;
   String message;
 
   Exception exception;

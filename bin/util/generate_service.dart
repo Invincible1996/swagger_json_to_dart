@@ -1,16 +1,20 @@
+import 'package:common_utils/common_utils.dart';
+
+import 'code_format.dart';
+
 ///
 /// @date: 2022/1/5 13:36
 /// @author: kevin
 /// @description: 生成service 文件
 ///
 import 'string_util.dart';
-import 'dart:io' show Platform;
 
 class GenerateService {
   ///
   ///
   ///
-  static String generateService(jsonMaps) {
+  static Future<String> generateService(jsonMaps) async {
+    String author = await CodeFormat.getLoginUsername();
     var serviceBuffer = StringBuffer();
     serviceBuffer.write("// GENERATED CODE - DO NOT MODIFY BY HAND\n");
     serviceBuffer.write("import './struct.dart';\n");
@@ -22,9 +26,10 @@ class GenerateService {
     serviceBuffer.write(
         "// **************************************************************************\n\n");
     // 解析json 生成方法
-    jsonMaps['paths'].forEach((key, value) {
-      serviceBuffer.write("/// @author ${Platform.localHostname} \n");
-      serviceBuffer.write("/// @date ${DateTime.now()}\n");
+    jsonMaps['paths'].forEach((key, value) async {
+      serviceBuffer.write("/// @author $author");
+      serviceBuffer.write(
+          "/// @date ${DateUtil.formatDate(DateTime.now(), format: 'yyyy-MM-dd HH:MM')}\n");
       var className = (value['post']['tags'][0] as String).replaceLine();
       serviceBuffer.write("/// @desc $className");
       serviceBuffer.write("\nclass $className extends BaseController {\n");
@@ -55,8 +60,8 @@ class GenerateService {
         serviceBuffer.write("\t\ttry {\n");
         serviceBuffer.write("\t\tvar res =  await post('$key');\n");
       }
-      serviceBuffer.write(
-          "${'\t' * 3}var out = $responseType.fromJson(res.data['data']);\n");
+      serviceBuffer
+          .write("${'\t' * 3}var out = $responseType.fromJson(res.data);\n");
       serviceBuffer.write(
           "${'\t' * 3}return ApiResponse.completed(out,res.data['code'],res.data['message']);\n");
       serviceBuffer.write("\t\t} catch(e) {\n");

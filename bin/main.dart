@@ -32,7 +32,7 @@ createBasicFile() {
 class ApiResponse<T> implements Exception {
   Status status;
   T data;
-  int code;
+  String code;
   String message;
 
   Exception exception;
@@ -44,11 +44,12 @@ class ApiResponse<T> implements Exception {
 
 enum Status { completed, error }
   ''';
-  FileUtil.createFile('./lib/model/api_response.dart', content);
+
+  FileUtil.createFile('api_response.dart', content);
 
   var controllerContent = '''
   import 'package:dio/dio.dart';
-
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 ///
 /// @date: 2022/1/4 15:57
 /// @author: kevin
@@ -59,7 +60,17 @@ class BaseController {
   Dio dio = Dio();
 
   BaseController() {
-    dio.options.baseUrl = 'http://127.0.0.1:8000';
+    dio.options.baseUrl = 'http://192.168.11.41:19960';
+    dio.interceptors.add(PrettyDioLogger());
+// customization
+   dio.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 90));
   }
 
   Future post(String path, {data}) async {
@@ -71,7 +82,7 @@ class BaseController {
 
   ''';
 
-  FileUtil.createFile('./lib/model/base_controller.dart', controllerContent);
+  FileUtil.createFile('base_controller.dart', controllerContent);
 }
 
 fetchData(String requestUrl) async {
@@ -102,12 +113,12 @@ fetchData(String requestUrl) async {
 
 /// 生成service.dart
 void generateService() async {
-  var content = GenerateService.generateService(jsonMaps);
-  FileUtil.createFile('./lib/model/service.dart', content);
+  var content = await GenerateService.generateService(jsonMaps);
+  FileUtil.createFile('service.dart', content);
 }
 
 void generateStruct() {
   var struct = GenerateStruct(buffer, jsonMaps);
   var content = struct.generateStruct();
-  FileUtil.createFile('./lib/model/struct.dart', content);
+  FileUtil.createFile('struct.dart', content);
 }

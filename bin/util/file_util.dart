@@ -8,12 +8,14 @@ import 'dart:io';
 
 class FileUtil {
   ///
-  /// @params [fileName] [fileContent]
+  /// @params [fileName]
+  /// @params [fileContent]
   /// @desc 生成文件
   static void createFile(String fileName, String fileContent) async {
     try {
-      File file = File(fileName);
-      // 向文件写入字符串
+      var directory = await Directory('lib/service/').create(recursive: true);
+      File file = File('${directory.path}$fileName');
+      print('文件生成的路径 ${directory.path}$fileName');
       await file.writeAsString(fileContent);
     } catch (e) {
       print(e);
