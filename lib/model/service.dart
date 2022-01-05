@@ -3,11 +3,11 @@ import './struct.dart';
 import 'base_controller.dart';
 import 'api_response.dart';
 // **************************************************************************
-// TodoReporterGenerator
+// GenerateService
 // **************************************************************************
 
-/// @author
-/// @date 2022-01-05 14:04:39.352606
+/// @author kevindeMacBook-Pro.local 
+/// @date 2022-01-05 15:00:20.259354
 /// @desc EmployeeAccountController
 class EmployeeAccountController extends BaseController {
 	///
@@ -24,8 +24,8 @@ class EmployeeAccountController extends BaseController {
 		}
 	}
 }
-/// @author
-/// @date 2022-01-05 14:04:39.361655
+/// @author kevindeMacBook-Pro.local 
+/// @date 2022-01-05 15:00:20.266855
 /// @desc StudentAccountController
 class StudentAccountController extends BaseController {
 	///
@@ -42,8 +42,8 @@ class StudentAccountController extends BaseController {
 		}
 	}
 }
-/// @author
-/// @date 2022-01-05 14:04:39.361804
+/// @author kevindeMacBook-Pro.local 
+/// @date 2022-01-05 15:00:20.266965
 /// @desc TeacherAccountController
 class TeacherAccountController extends BaseController {
 	///

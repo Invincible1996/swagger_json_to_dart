@@ -4,6 +4,7 @@
 /// @description: 生成service 文件
 ///
 import 'string_util.dart';
+import 'dart:io' show Platform;
 
 class GenerateService {
   ///
@@ -16,15 +17,11 @@ class GenerateService {
     serviceBuffer.write("import 'base_controller.dart';\n");
     serviceBuffer.write("import 'api_response.dart';\n");
     serviceBuffer.write("// **************************************************************************\n");
-    serviceBuffer.write("// TodoReporterGenerator\n");
+    serviceBuffer.write("// GenerateService\n");
     serviceBuffer.write("// **************************************************************************\n\n");
-    // **************************************************************************
-
-// **************************************************************************
-
     // 解析json 生成方法
     jsonMaps['paths'].forEach((key, value) {
-      serviceBuffer.write("/// @author\n");
+      serviceBuffer.write("/// @author ${Platform.localHostname} \n");
       serviceBuffer.write("/// @date ${DateTime.now()}\n");
       var className = (value['post']['tags'][0] as String).replaceLine();
       serviceBuffer.write("/// @desc $className");
@@ -37,8 +34,6 @@ class GenerateService {
       }
       // var functionName = (key as String).getFuncName();
       var functionName = (value['post']['operationId'] as String).replaceAll("UsingPOST", '');
-
-      print(functionName);
 
       var responseType = ''.getResponseType(value);
       serviceBuffer.write("\t///\n");

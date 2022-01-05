@@ -102,4 +102,29 @@ extension StringUtils on String {
     }
     return responseType ?? 'Null';
   }
+
+  String transferType(dynamic value) {
+    if (value['type'] == 'string') {
+      return 'String';
+    } else if (value['type'] == 'integer') {
+      return 'int';
+    } else if (value['type'] == 'boolean') {
+      return 'bool';
+    } else if (value['type'] == 'array') {
+      // 数组类型
+      var classType = value['items']['\$ref'].split('/')[2].split('.')[1];
+      return 'List<$classType>';
+    } else if (checkMasHasRefProperty(value)) {
+      // 如果包含ref 属性 获取实体对象
+      var refData = value['\$ref'].split('/')[2].split('.')[1];
+      return refData;
+    } else {
+      return 'dynamic';
+    }
+  }
+}
+
+///检查map是否含有$ref属性
+bool checkMasHasRefProperty(Map map) {
+  return map?.containsKey('\$ref') ?? false;
 }

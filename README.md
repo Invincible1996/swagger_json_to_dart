@@ -9,4 +9,5 @@ dart2native bin/main.dart -o ~/.pub-cache/bin/generate_swagger
 ```
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 ```
-### 3.Run ```generate_swagger``` under your project root directory
+### 3.Run  under your project root directory
+```generate_swagger```

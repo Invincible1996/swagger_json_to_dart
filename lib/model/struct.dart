@@ -1,10 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 
+// **************************************************************************
+// GenerateStruct
+// **************************************************************************
+
+
 ///
-///@desc req
-///
-class EmployeeUserNamePasswordCheckReqDTO{
+/// @author kevindeMacBook-Pro.local
+/// @date 2022-01-05 15:00:20.268903
+/// @desc EmployeeUserNamePasswordCheckReqDTO
+/// 
+class EmployeeUserNamePasswordCheckReqDTO {
 	//密码
 	String password;
 	//用户账户名
@@ -25,9 +32,11 @@ class EmployeeUserNamePasswordCheckReqDTO{
 	}
 }
 
-/// @author
-/// @date
+///
+/// @author kevindeMacBook-Pro.local
+/// @date 2022-01-05 15:00:20.270165
 /// @desc Result
+/// 
 class Result {
 	//
 	String code;
@@ -58,9 +67,11 @@ class Result {
 }
 
 ///
-///@desc req
-///
-class StudentUserNamePasswordCheckReqDTO{
+/// @author kevindeMacBook-Pro.local
+/// @date 2022-01-05 15:00:20.271029
+/// @desc StudentUserNamePasswordCheckReqDTO
+/// 
+class StudentUserNamePasswordCheckReqDTO {
 	//密码
 	String password;
 	//用户账户名
@@ -82,9 +93,11 @@ class StudentUserNamePasswordCheckReqDTO{
 }
 
 ///
-///@desc req
-///
-class TeacherUserNamePasswordCheckReqDTO{
+/// @author kevindeMacBook-Pro.local
+/// @date 2022-01-05 15:00:20.271239
+/// @desc TeacherUserNamePasswordCheckReqDTO
+/// 
+class TeacherUserNamePasswordCheckReqDTO {
 	//密码
 	String password;
 	//用户账户名
