@@ -1,4 +1,6 @@
-import 'dart:io';
+import 'package:common_utils/common_utils.dart';
+
+import 'code_format.dart';
 
 ///
 /// @date: 2022/1/5 13:37
@@ -17,7 +19,7 @@ class GenerateStruct {
   //   buffer = StringBuffer();
   // }
 
-  String generateStruct() {
+  Future<String> generateStruct() async {
     buffer.write("// GENERATED CODE - DO NOT MODIFY BY HAND${'\n' * 3}");
     buffer.write(
         "// **************************************************************************\n");
@@ -28,19 +30,22 @@ class GenerateStruct {
     var paths = jsonMaps['paths'].keys.toList();
     for (var item in paths) {
       /// 解析入参
-      transferRequestToDartClass(jsonMaps['paths'][item]['post']['parameters']);
+      await await transferRequestToDartClass(
+          jsonMaps['paths'][item]['post']['parameters']);
 
       /// 解析出参
-      transferResponseToDartClass(
+      await transferResponseToDartClass(
           jsonMaps['paths'][item]['post']['responses']['200']);
     }
     return buffer.toString();
   }
 
-  void transferMapToDartClass2(dataClassName, Map properties2) {
+  void transferMapToDartClass2(dataClassName, Map properties2) async {
+    String author = await CodeFormat.getLoginUsername();
     buffer.write("\n\n///\n");
-    buffer.write("/// @author ${Platform.localHostname}\n");
-    buffer.write("/// @date ${DateTime.now()}\n");
+    buffer.write("/// @author $author");
+    buffer.write(
+        "/// @date ${DateUtil.formatDate(DateTime.now(), format: 'yyyy-MM-dd HH:MM')}\n");
     buffer.write("/// @desc $dataClassName\n");
     buffer.write("/// \n");
     buffer.write("class $dataClassName {\n");
@@ -118,18 +123,19 @@ class GenerateStruct {
 // }
 
   /// 解析请求参数生成Struct
-  transferRequestToDartClass(List<dynamic> params) {
+  transferRequestToDartClass(List<dynamic> params) async {
     for (var item in params) {
       var desc = item['description'];
       if (item['schema'] == null) return;
       var ref = item['schema']['\$ref'].split('/')[2];
       // var className = item['schema']['\$ref'].split('.')[1];
       var className = item['schema']['\$ref'].split('/')[2];
-
+      String author = await CodeFormat.getLoginUsername();
       // 写入struct
       buffer.write("\n\n///\n");
-      buffer.write("/// @author ${Platform.localHostname}\n");
-      buffer.write("/// @date ${DateTime.now()}\n");
+      buffer.write("/// @author $author");
+      buffer.write(
+          "/// @date ${DateUtil.formatDate(DateTime.now(), format: 'yyyy-MM-dd HH:MM')}\n");
       buffer.write("/// @desc $className\n");
       buffer.write("/// \n");
       buffer.write("class $className {");

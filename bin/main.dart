@@ -117,8 +117,8 @@ void generateService() async {
   FileUtil.createFile('service.dart', content);
 }
 
-void generateStruct() {
+void generateStruct() async {
   var struct = GenerateStruct(buffer, jsonMaps);
-  var content = struct.generateStruct();
+  var content = await struct.generateStruct();
   FileUtil.createFile('struct.dart', content);
 }

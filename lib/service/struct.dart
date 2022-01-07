@@ -5,8 +5,8 @@
 // **************************************************************************
 
 ///
-/// @author kevindeMacBook-Pro.local
-/// @date 2022-01-05 18:44:25.699926
+/// @author kevin
+/// @date 2022-01-07 10:01
 /// @desc EmployeeUserNamePasswordCheckReqDTO
 ///
 class EmployeeUserNamePasswordCheckReqDTO {
@@ -34,8 +34,8 @@ class EmployeeUserNamePasswordCheckReqDTO {
 }
 
 ///
-/// @author kevindeMacBook-Pro.local
-/// @date 2022-01-05 18:44:25.706148
+/// @author kevin
+/// @date 2022-01-07 10:01
 /// @desc Result
 ///
 class Result {
@@ -72,8 +72,8 @@ class Result {
 }
 
 ///
-/// @author kevindeMacBook-Pro.local
-/// @date 2022-01-05 18:44:25.706955
+/// @author kevin
+/// @date 2022-01-07 10:01
 /// @desc StudentUserNamePasswordCheckReqDTO
 ///
 class StudentUserNamePasswordCheckReqDTO {
@@ -101,8 +101,8 @@ class StudentUserNamePasswordCheckReqDTO {
 }
 
 ///
-/// @author kevindeMacBook-Pro.local
-/// @date 2022-01-05 18:44:25.707059
+/// @author kevin
+/// @date 2022-01-07 10:01
 /// @desc TeacherUserNamePasswordCheckReqDTO
 ///
 class TeacherUserNamePasswordCheckReqDTO {
