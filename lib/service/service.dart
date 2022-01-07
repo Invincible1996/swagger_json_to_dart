@@ -1,19 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-import './struct.dart';
-import 'base_controller.dart';
-import 'api_response.dart';
 // **************************************************************************
 // GenerateService
 // **************************************************************************
+import './struct.dart';
+import 'base_controller.dart';
+import 'api_response.dart';
 
 /// @author kevin
-/// @date 2022-01-07 10:01
+
+/// @date 2022-01-07 17:01
 /// @desc EmployeeAccountController
 class EmployeeAccountController extends BaseController {
-  ///
-  ///@path /employeeAccount/checkUserNameAndPassword
-  ///@desc 员工用户名密码校验
-  ///
+  /// @path /employeeAccount/checkUserNameAndPassword
+  /// @desc 员工用户名密码校验
   Future<ApiResponse<Result>> checkUserNameAndPassword(
       EmployeeUserNamePasswordCheckReqDTO input) async {
     try {
@@ -21,20 +20,19 @@ class EmployeeAccountController extends BaseController {
           data: input.toJson());
       var out = Result.fromJson(res.data);
       return ApiResponse.completed(out, res.data['code'], res.data['message']);
-    } catch (e) {
-      return ApiResponse.error(e);
+    } catch (err) {
+      return ApiResponse.error(err);
     }
   }
 }
 
 /// @author kevin
-/// @date 2022-01-07 10:01
+
+/// @date 2022-01-07 17:01
 /// @desc StudentAccountController
 class StudentAccountController extends BaseController {
-  ///
-  ///@path /studentAccount/checkUserNameAndPassword
-  ///@desc 学生账户名密码登录
-  ///
+  /// @path /studentAccount/checkUserNameAndPassword
+  /// @desc 学生账户名密码登录
   Future<ApiResponse<Result>> checkUserNameAndPassword_1(
       StudentUserNamePasswordCheckReqDTO input) async {
     try {
@@ -42,20 +40,19 @@ class StudentAccountController extends BaseController {
           data: input.toJson());
       var out = Result.fromJson(res.data);
       return ApiResponse.completed(out, res.data['code'], res.data['message']);
-    } catch (e) {
-      return ApiResponse.error(e);
+    } catch (err) {
+      return ApiResponse.error(err);
     }
   }
 }
 
 /// @author kevin
-/// @date 2022-01-07 10:01
+
+/// @date 2022-01-07 17:01
 /// @desc TeacherAccountController
 class TeacherAccountController extends BaseController {
-  ///
-  ///@path /teacherAccount/checkUserNameAndPassword
-  ///@desc 老师用户名密码校验
-  ///
+  /// @path /teacherAccount/checkUserNameAndPassword
+  /// @desc 老师用户名密码校验
   Future<ApiResponse<Result>> checkUserNameAndPassword_2(
       TeacherUserNamePasswordCheckReqDTO input) async {
     try {
@@ -63,8 +60,8 @@ class TeacherAccountController extends BaseController {
           data: input.toJson());
       var out = Result.fromJson(res.data);
       return ApiResponse.completed(out, res.data['code'], res.data['message']);
-    } catch (e) {
-      return ApiResponse.error(e);
+    } catch (err) {
+      return ApiResponse.error(err);
     }
   }
 }

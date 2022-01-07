@@ -2,6 +2,7 @@
 /// @date: 2022/1/4 13:32
 /// @author: kevin
 /// @description: dart
+import 'list_util.dart';
 
 extension StringUtils on String {
   String getDataTypeWithPrefix() {
@@ -54,11 +55,8 @@ extension StringUtils on String {
           )
           .values
           .toList();
-      var str = '';
-      newList.forEach((element) {
-        str += element;
-      });
-      return str;
+
+      return newList.appendElement();
     } else {
       return this;
     }
@@ -107,8 +105,18 @@ extension StringUtils on String {
     }
     return responseType ?? 'Null';
   }
+}
 
-  String transferType(dynamic value) {
+///检查map是否含有$ref属性
+bool checkMasHasRefProperty(Map map) {
+  return map?.containsKey('\$ref') ?? false;
+}
+
+class StringUtil {
+  ///
+  ///
+  ///
+  static String transferType(dynamic value) {
     if (value['type'] == 'string') {
       return 'String';
     } else if (value['type'] == 'integer') {
@@ -127,9 +135,4 @@ extension StringUtils on String {
       return 'dynamic';
     }
   }
-}
-
-///检查map是否含有$ref属性
-bool checkMasHasRefProperty(Map map) {
-  return map?.containsKey('\$ref') ?? false;
 }

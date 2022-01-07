@@ -114,6 +114,7 @@ fetchData(String requestUrl) async {
 /// 生成service.dart
 void generateService() async {
   var content = await GenerateService.generateService(jsonMaps);
+  print(content);
   FileUtil.createFile('service.dart', content);
 }
 
