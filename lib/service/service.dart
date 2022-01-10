@@ -8,7 +8,7 @@ import 'api_response.dart';
 
 /// @author kevin
 
-/// @date 2022-01-07 17:01
+/// @date 2022-01-10 17:01
 /// @desc EmployeeAccountController
 class EmployeeAccountController extends BaseController {
   /// @path /employeeAccount/checkUserNameAndPassword
@@ -18,7 +18,7 @@ class EmployeeAccountController extends BaseController {
     try {
       var res = await post('/employeeAccount/checkUserNameAndPassword',
           data: input.toJson());
-      var out = Result.fromJson(res.data);
+      var out = Result.fromJson(res.data['data']);
       return ApiResponse.completed(out, res.data['code'], res.data['message']);
     } catch (err) {
       return ApiResponse.error(err);
@@ -28,7 +28,7 @@ class EmployeeAccountController extends BaseController {
 
 /// @author kevin
 
-/// @date 2022-01-07 17:01
+/// @date 2022-01-10 17:01
 /// @desc StudentAccountController
 class StudentAccountController extends BaseController {
   /// @path /studentAccount/checkUserNameAndPassword
@@ -38,7 +38,7 @@ class StudentAccountController extends BaseController {
     try {
       var res = await post('/studentAccount/checkUserNameAndPassword',
           data: input.toJson());
-      var out = Result.fromJson(res.data);
+      var out = Result.fromJson(res.data['data']);
       return ApiResponse.completed(out, res.data['code'], res.data['message']);
     } catch (err) {
       return ApiResponse.error(err);
@@ -48,7 +48,7 @@ class StudentAccountController extends BaseController {
 
 /// @author kevin
 
-/// @date 2022-01-07 17:01
+/// @date 2022-01-10 17:01
 /// @desc TeacherAccountController
 class TeacherAccountController extends BaseController {
   /// @path /teacherAccount/checkUserNameAndPassword
@@ -58,7 +58,7 @@ class TeacherAccountController extends BaseController {
     try {
       var res = await post('/teacherAccount/checkUserNameAndPassword',
           data: input.toJson());
-      var out = Result.fromJson(res.data);
+      var out = Result.fromJson(res.data['data']);
       return ApiResponse.completed(out, res.data['code'], res.data['message']);
     } catch (err) {
       return ApiResponse.error(err);

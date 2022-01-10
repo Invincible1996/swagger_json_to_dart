@@ -115,7 +115,7 @@ class GenerateService {
             Future<ApiResponse<$responseType>> $functionName(${request != null ? '$request input' : ''}) async {
                 try {
                 var res = await post('$key',data:${request != null ? 'input.toJson()' : ''});
-                var out = $responseType.fromJson(res.data);
+                var out = $responseType.fromJson(res.data['data']);
                 return ApiResponse.completed(out,res.data['code'],res.data['message']);
                 } catch(err) {
                   return ApiResponse.error(err);

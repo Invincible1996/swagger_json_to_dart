@@ -63,6 +63,24 @@ extension StringUtils on String {
   }
 
   ///
+  ///
+  ///
+  String replaceClassName() {
+    if (this.contains("«")) {
+      return this.split("«")[0];
+    } else {
+      return this;
+    }
+  }
+
+  ///
+  ///
+  ///
+  String getDataTypeFromRef() {
+    return this.split('/')[2];
+  }
+
+  ///
   /// @desc 下划线替换并大些
   ///
   String replaceUnderLine() {
@@ -88,8 +106,12 @@ extension StringUtils on String {
     }
   }
 
+  String getResponseTypeWithoutReply() {
+    return this.split("«")[1].split("»")[0];
+  }
+
   String getResponseType(value) {
-    var responseType;
+    String responseType;
     Map<String, dynamic> resSchema =
         value['post']['responses']['200']['schema'];
     if (resSchema.containsKey('allOf')) {
@@ -125,11 +147,11 @@ class StringUtil {
       return 'bool';
     } else if (value['type'] == 'array') {
       // 数组类型
-      var classType = value['items']['\$ref'].split('/')[2].split('.')[1];
+      var classType = value['items']['\$ref'].split('/')[2];
       return 'List<$classType>';
     } else if (checkMasHasRefProperty(value)) {
       // 如果包含ref 属性 获取实体对象
-      var refData = value['\$ref'].split('/')[2].split('.')[1];
+      var refData = value['\$ref'].split('/')[2];
       return refData;
     } else {
       return 'dynamic';

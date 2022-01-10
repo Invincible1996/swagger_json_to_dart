@@ -1,63 +1,111 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // **************************************************************************
-// GenerateStruct
+// GenerateService
 // **************************************************************************
-/// @author kevin
-
-/// @date 2022-01-07 17:01
+///
 /// @desc EmployeeUserNamePasswordCheckReqDTO
+///
 class EmployeeUserNamePasswordCheckReqDTO {
-  //密码;
   String password;
-  //用户账户名;
   String userName;
 
   EmployeeUserNamePasswordCheckReqDTO({
     this.password,
     this.userName,
   });
-  EmployeeUserNamePasswordCheckReqDTO.fromJson(dynamic json) {
+
+  EmployeeUserNamePasswordCheckReqDTO.fromJson(Map<String, dynamic> json) {
     password = json['password'];
     userName = json['userName'];
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['password'] = this.password;
+    data['userName'] = this.userName;
+    return data;
+  }
 }
 
-/// @author kevin
+///
+/// @desc Result
+///
+class Result {
+  String code;
+  String data;
+  String message;
+  bool success;
 
-/// @date 2022-01-07 17:01
+  Result({
+    this.code,
+    this.data,
+    this.message,
+    this.success,
+  });
+
+  Result.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    data = json['data'];
+    message = json['message'];
+    success = json['success'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['code'] = this.code;
+    data['data'] = this.data;
+    data['message'] = this.message;
+    data['success'] = this.success;
+    return data;
+  }
+}
+
+///
 /// @desc StudentUserNamePasswordCheckReqDTO
+///
 class StudentUserNamePasswordCheckReqDTO {
-  //密码;
   String password;
-  //用户账户名;
   String userName;
 
   StudentUserNamePasswordCheckReqDTO({
     this.password,
     this.userName,
   });
-  StudentUserNamePasswordCheckReqDTO.fromJson(dynamic json) {
+
+  StudentUserNamePasswordCheckReqDTO.fromJson(Map<String, dynamic> json) {
     password = json['password'];
     userName = json['userName'];
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['password'] = this.password;
+    data['userName'] = this.userName;
+    return data;
+  }
 }
 
-/// @author kevin
-
-/// @date 2022-01-07 17:01
+///
 /// @desc TeacherUserNamePasswordCheckReqDTO
+///
 class TeacherUserNamePasswordCheckReqDTO {
-  //密码;
   String password;
-  //用户账户名;
   String userName;
 
   TeacherUserNamePasswordCheckReqDTO({
     this.password,
     this.userName,
   });
-  TeacherUserNamePasswordCheckReqDTO.fromJson(dynamic json) {
+
+  TeacherUserNamePasswordCheckReqDTO.fromJson(Map<String, dynamic> json) {
     password = json['password'];
     userName = json['userName'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['password'] = this.password;
+    data['userName'] = this.userName;
+    return data;
   }
 }

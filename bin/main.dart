@@ -16,6 +16,7 @@ void main() async {
   // get console input
   print('请输入swagger json url（不输入选择默认地址）');
   var defaultUrl = 'http://192.168.11.41:19960/v2/api-docs';
+  // var requestUrl = 'http://127.0.0.1:8090/cn/v2/api-docs';
   var requestUrl = stdin.readLineSync(encoding: utf8);
   print(requestUrl);
   createBasicFile();
@@ -60,7 +61,7 @@ class BaseController {
   Dio dio = Dio();
 
   BaseController() {
-    dio.options.baseUrl = 'http://192.168.11.41:19960';
+    dio.options.baseUrl = ''http://127.0.0.1:8090/cn'';
     dio.interceptors.add(PrettyDioLogger());
 // customization
    dio.interceptors.add(PrettyDioLogger(
