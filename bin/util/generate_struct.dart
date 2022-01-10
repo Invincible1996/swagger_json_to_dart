@@ -1,5 +1,4 @@
 import 'code_format.dart';
-
 ///
 /// @date: 2022/1/5 13:37
 /// @author: kevin
@@ -8,11 +7,10 @@ import 'code_format.dart';
 import 'string_util.dart';
 
 class GenerateStruct {
-  StringBuffer buffer;
   Map jsonMaps;
   String author = '';
 
-  GenerateStruct(this.buffer, this.jsonMaps);
+  GenerateStruct(this.jsonMaps);
 
   Future<String> generateStruct() async {
     author = await CodeFormat.getLoginUsername();

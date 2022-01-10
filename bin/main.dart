@@ -120,7 +120,7 @@ void generateService() async {
 }
 
 void generateStruct() async {
-  var struct = GenerateStruct(buffer, jsonMaps);
+  var struct = GenerateStruct(jsonMaps);
   var content = await struct.generateStruct();
   FileUtil.createFile('struct.dart', content);
 }

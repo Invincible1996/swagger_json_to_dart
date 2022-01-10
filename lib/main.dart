@@ -9,7 +9,7 @@ void main(List<String> args) async {
   //   ),
   // );
 
-  var response = await UserController().register(Person());
+  // var response = await UserController().register(Person());
 
-  print(response);
+  // print(response);
 }
