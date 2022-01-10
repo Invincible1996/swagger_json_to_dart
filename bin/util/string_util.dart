@@ -32,6 +32,14 @@ extension StringUtils on String {
     return this.replaceAll("«string»", '');
   }
 
+  String getDataTypeFromResponse() {
+    if (this.contains("«")) {
+      return this.split("«")[1].split("»")[0];
+    } else {
+      return this;
+    }
+  }
+
   ///
   /// @desc 首字母大写
   ///
@@ -120,10 +128,14 @@ extension StringUtils on String {
           (resSchema['allOf'][1]['properties']['data']['\$ref'] as String)
               .getDataTypeWithoutPrefix();
     } else {
-      //
-      responseType = (resSchema['\$ref'] as String)
-          .getDataTypeWithoutPrefix()
-          .replaceCharacter();
+      if ((resSchema['\$ref'] as String).contains('string')) {
+        responseType = 'Result';
+      } else {
+        //
+        responseType = (resSchema['\$ref'] as String)
+            .getDataTypeWithoutPrefix()
+            .getDataTypeFromResponse();
+      }
     }
     return responseType ?? 'Null';
   }

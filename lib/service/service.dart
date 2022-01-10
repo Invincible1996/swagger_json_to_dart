@@ -18,7 +18,8 @@ class EmployeeAccountController extends BaseController {
     try {
       var res = await post('/employeeAccount/checkUserNameAndPassword',
           data: input.toJson());
-      var out = Result.fromJson(res.data['data']);
+      print(res);
+      var out = Result.fromJson(res.data);
       return ApiResponse.completed(out, res.data['code'], res.data['message']);
     } catch (err) {
       return ApiResponse.error(err);
