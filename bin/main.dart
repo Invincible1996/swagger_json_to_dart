@@ -15,10 +15,11 @@ var buffer = StringBuffer();
 void main() async {
   // get console input
   print('请输入swagger json url（不输入选择默认地址）');
-  var defaultUrl = 'http://192.168.11.41:19960/v2/api-docs';
-  // var requestUrl = 'http://127.0.0.1:8090/cn/v2/api-docs';
-  var requestUrl = stdin.readLineSync(encoding: utf8);
-  print(requestUrl);
+  // var defaultUrl = 'http://192.168.11.41:19960/v2/api-docs';
+  var defaultUrl = 'http://127.0.0.1:8090/cn/v2/api-docs';
+  var requestUrl = 'http://127.0.0.1:8090/cn/v2/api-docs';
+  // var requestUrl = stdin.readLineSync(encoding: utf8);
+  // print(requestUrl);
   createBasicFile();
   fetchData(requestUrl.length > 0 ? requestUrl : defaultUrl);
 }
@@ -100,7 +101,6 @@ fetchData(String requestUrl) async {
 
     Dio dio = Dio();
     var response = await dio.get(requestUrl);
-    print(response);
 
     // final stringData = await response.transform(utf8.decoder).join();
     jsonMaps = response.data;
@@ -114,8 +114,7 @@ fetchData(String requestUrl) async {
 
 /// 生成service.dart
 void generateService() async {
-  var content = await GenerateService.generateService(jsonMaps);
-  print(content);
+  var content = await GenerateService(jsonMaps).generateService();
   FileUtil.createFile('service.dart', content);
 }
 

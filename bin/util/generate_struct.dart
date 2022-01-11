@@ -20,8 +20,40 @@ class GenerateStruct {
       // **************************************************************************
       // GenerateService
       // **************************************************************************
+      ${_generateResultClass()}
       ${_generateDartStruct()}
       """;
+  }
+
+  _generateResultClass() {
+    return """
+    ///@desc Result
+class Result {
+  String code;
+  dynamic data;
+  String message;
+
+  Result({
+    this.code,
+    this.data,
+    this.message,
+  });
+
+  Result.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    data = json['data'];
+    message = json['message'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['code'] = this.code;
+    data['data'] = this.data;
+    data['message'] = this.message;
+    return data;
+  }
+}
+    """;
   }
 
   ///
@@ -32,7 +64,8 @@ class GenerateStruct {
     (jsonMaps['definitions'] as Map).forEach((key, value) {
       print(key);
       var className = (key as String).replaceClassName();
-      str += """
+      if (className != 'Result') {
+        str += """
       ///
       /// @desc $className
       ///
@@ -51,6 +84,7 @@ class GenerateStruct {
           }
         }
       """;
+      }
     });
     return str;
   }

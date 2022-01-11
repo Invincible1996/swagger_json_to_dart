@@ -2,52 +2,22 @@
 // **************************************************************************
 // GenerateService
 // **************************************************************************
-///
-/// @desc EmployeeUserNamePasswordCheckReqDTO
-///
-class EmployeeUserNamePasswordCheckReqDTO {
-  String password;
-  String userName;
-
-  EmployeeUserNamePasswordCheckReqDTO({
-    this.password,
-    this.userName,
-  });
-
-  EmployeeUserNamePasswordCheckReqDTO.fromJson(Map<String, dynamic> json) {
-    password = json['password'];
-    userName = json['userName'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['password'] = this.password;
-    data['userName'] = this.userName;
-    return data;
-  }
-}
-
-///
-/// @desc Result
-///
+///@desc Result
 class Result {
   String code;
-  String data;
+  dynamic data;
   String message;
-  bool success;
 
   Result({
     this.code,
     this.data,
     this.message,
-    this.success,
   });
 
   Result.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     data = json['data'];
     message = json['message'];
-    success = json['success'];
   }
 
   Map<String, dynamic> toJson() {
@@ -55,57 +25,112 @@ class Result {
     data['code'] = this.code;
     data['data'] = this.data;
     data['message'] = this.message;
-    data['success'] = this.success;
     return data;
   }
 }
 
 ///
-/// @desc StudentUserNamePasswordCheckReqDTO
+/// @desc LoginResVO
 ///
-class StudentUserNamePasswordCheckReqDTO {
-  String password;
-  String userName;
+class LoginResVO {
+  int age;
+  int id;
+  List<Person> personList;
+  UserAddress userAddress;
+  String username;
 
-  StudentUserNamePasswordCheckReqDTO({
-    this.password,
-    this.userName,
+  LoginResVO({
+    this.age,
+    this.id,
+    this.personList,
+    this.userAddress,
+    this.username,
   });
 
-  StudentUserNamePasswordCheckReqDTO.fromJson(Map<String, dynamic> json) {
-    password = json['password'];
-    userName = json['userName'];
+  LoginResVO.fromJson(Map<String, dynamic> json) {
+    age = json['age'];
+    id = json['id'];
+    if (json['personList'] != null) {
+      personList = <Person>[];
+      json['personList'].forEach((v) {
+        personList.add(Person.fromJson(v));
+      });
+    }
+    userAddress = json['userAddress'] != null
+        ? UserAddress.fromJson(json['userAddress'])
+        : null;
+    username = json['username'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['password'] = this.password;
-    data['userName'] = this.userName;
+    data['age'] = this.age;
+    data['id'] = this.id;
+    if (this.personList != null) {
+      data['personList'] = this.personList.map((v) => v.toJson()).toList();
+    }
+    if (this.userAddress != null) {
+      data['userAddress'] = this.userAddress.toJson();
+    }
+    data['username'] = this.username;
     return data;
   }
 }
 
 ///
-/// @desc TeacherUserNamePasswordCheckReqDTO
+/// @desc Person
 ///
-class TeacherUserNamePasswordCheckReqDTO {
-  String password;
-  String userName;
+class Person {
+  int age;
+  int id;
+  String username;
 
-  TeacherUserNamePasswordCheckReqDTO({
-    this.password,
-    this.userName,
+  Person({
+    this.age,
+    this.id,
+    this.username,
   });
 
-  TeacherUserNamePasswordCheckReqDTO.fromJson(Map<String, dynamic> json) {
-    password = json['password'];
-    userName = json['userName'];
+  Person.fromJson(Map<String, dynamic> json) {
+    age = json['age'];
+    id = json['id'];
+    username = json['username'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['password'] = this.password;
-    data['userName'] = this.userName;
+    data['age'] = this.age;
+    data['id'] = this.id;
+    data['username'] = this.username;
+    return data;
+  }
+}
+
+///
+/// @desc UserAddress
+///
+class UserAddress {
+  String city;
+  String province;
+  String religion;
+
+  UserAddress({
+    this.city,
+    this.province,
+    this.religion,
+  });
+
+  UserAddress.fromJson(Map<String, dynamic> json) {
+    city = json['city'];
+    province = json['province'];
+    religion = json['religion'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['city'] = this.city;
+    data['province'] = this.province;
+    data['religion'] = this.religion;
     return data;
   }
 }

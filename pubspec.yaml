@@ -8,4 +8,5 @@ dependencies:
   dio: any
   pretty_dio_logger: any
   common_utils: any
+  logger: any
 dev_dependencies:

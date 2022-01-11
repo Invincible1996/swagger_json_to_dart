@@ -128,7 +128,8 @@ extension StringUtils on String {
           (resSchema['allOf'][1]['properties']['data']['\$ref'] as String)
               .getDataTypeWithoutPrefix();
     } else {
-      if ((resSchema['\$ref'] as String).contains('string')) {
+      if ((resSchema['\$ref'] as String).contains('string') ||
+          (resSchema['\$ref'] as String).contains('object')) {
         responseType = 'Result';
       } else {
         //
@@ -138,6 +139,11 @@ extension StringUtils on String {
       }
     }
     return responseType ?? 'Null';
+  }
+
+  String getClassNameFromTags() {
+    var list = this.split("-").map((e) => e.firstLetterUppercase()).toList();
+    return list.appendElement();
   }
 }
 
