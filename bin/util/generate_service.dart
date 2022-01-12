@@ -1,11 +1,3 @@
-import 'package:common_utils/common_utils.dart';
-
-import '../main.dart';
-import 'code_format.dart';
-import 'list_util.dart';
-
-import 'log_util.dart';
-
 ///
 /// @date: 2022/1/5 13:36
 /// @author: kevin
@@ -48,20 +40,15 @@ class GenerateService {
   _formatJson(jsonMaps) {
     Map<String, List> tagMaps = {};
     for (var value in (jsonMaps['tags'] as List)) {
-      print(value);
       tagMaps.putIfAbsent(value['name'], () => []);
     }
-    print(tagMaps);
-
     (jsonMaps['paths'] as Map).forEach((key, value) {
-      print(value['post']['tags'][0]);
       tagMaps.forEach((key2, value2) {
         if (key2 == value['post']['tags'][0]) {
           value2.add({key: value});
         }
       });
     });
-    logger.e(tagMaps);
     return tagMaps;
   }
 
@@ -69,7 +56,6 @@ class GenerateService {
   ///
   ///
   _generateClass() {
-    print(jsonMaps);
     var service = '';
     jsonMaps.forEach((key, value) {
       var className = (key as String).getClassNameFromTags();
@@ -86,10 +72,6 @@ class GenerateService {
   String _generateFunc(List values) {
     var str = '';
     values.forEach((element) {
-      print("==========");
-      // print(element.keys.toList());
-      // print(element);
-
       (element as Map).forEach((key, value) {
         var request;
         if (value['post']['parameters'] != null &&
@@ -116,50 +98,4 @@ class GenerateService {
     });
     return str;
   }
-
-  ///
-  ///
-  ///
-  ///
-  // Future<String> _generateClass() async {
-  //   String author = await CodeFormat.getLoginUsername();
-  //   var list = (jsonMaps['paths'] as Map)
-  //       .map(
-  //         (key, value) {
-  //           var className = (value['post']['tags'][0] as String).replaceLine();
-  //           var functionName = (value['post']['operationId'] as String)
-  //               .replaceAll("UsingPOST", '');
-  //           var responseType = ''.getResponseType(value);
-  //           var request;
-  //           if (value['post']['parameters'] != null &&
-  //               value['post']['parameters'][0]['schema'] != null) {
-  //             String requestRef =
-  //                 value['post']['parameters'][0]['schema']['\$ref'];
-  //             request = requestRef.getDataTypeWithoutPrefix();
-  //           }
-  //           return MapEntry(key, """
-  //         /// @author $author
-  //         /// @date ${DateUtil.formatDate(DateTime.now(), format: 'yyyy-MM-dd HH:MM')}
-  //         /// @desc $className
-  //         class $className extends BaseController {
-  //           /// @path $key
-  //           /// @desc ${value['post']['summary']}
-  //           Future<ApiResponse<$responseType>> $functionName(${request != null ? '$request input' : ''}) async {
-  //               try {
-  //               var res = await post('$key',${request != null ? 'data: input.toJson()' : ''});
-  //               var out = $responseType.fromJson(res.data['data']);
-  //               return ApiResponse.completed(out,res.data['code'],res.data['message']);
-  //               } catch(err) {
-  //                 return ApiResponse.error(err);
-  //               }
-  //           }
-  //         }
-  //         """);
-  //         },
-  //       )
-  //       .values
-  //       .toList();
-
-  //   return list.appendElement();
-  // }
 }

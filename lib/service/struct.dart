@@ -30,107 +30,76 @@ class Result {
 }
 
 ///
-/// @desc LoginResVO
+/// @desc EmployeeUserNamePasswordCheckReqDTO
 ///
-class LoginResVO {
-  int age;
-  int id;
-  List<Person> personList;
-  UserAddress userAddress;
-  String username;
+class EmployeeUserNamePasswordCheckReqDTO {
+  String password;
+  String userName;
 
-  LoginResVO({
-    this.age,
-    this.id,
-    this.personList,
-    this.userAddress,
-    this.username,
+  EmployeeUserNamePasswordCheckReqDTO({
+    this.password,
+    this.userName,
   });
 
-  LoginResVO.fromJson(Map<String, dynamic> json) {
-    age = json['age'];
-    id = json['id'];
-    if (json['personList'] != null) {
-      personList = <Person>[];
-      json['personList'].forEach((v) {
-        personList.add(Person.fromJson(v));
-      });
-    }
-    userAddress = json['userAddress'] != null
-        ? UserAddress.fromJson(json['userAddress'])
-        : null;
-    username = json['username'];
+  EmployeeUserNamePasswordCheckReqDTO.fromJson(Map<String, dynamic> json) {
+    password = json['password'];
+    userName = json['userName'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['age'] = this.age;
-    data['id'] = this.id;
-    if (this.personList != null) {
-      data['personList'] = this.personList.map((v) => v.toJson()).toList();
-    }
-    if (this.userAddress != null) {
-      data['userAddress'] = this.userAddress.toJson();
-    }
-    data['username'] = this.username;
+    data['password'] = this.password;
+    data['userName'] = this.userName;
     return data;
   }
 }
 
 ///
-/// @desc Person
+/// @desc StudentUserNamePasswordCheckReqDTO
 ///
-class Person {
-  int age;
-  int id;
-  String username;
+class StudentUserNamePasswordCheckReqDTO {
+  String password;
+  String userName;
 
-  Person({
-    this.age,
-    this.id,
-    this.username,
+  StudentUserNamePasswordCheckReqDTO({
+    this.password,
+    this.userName,
   });
 
-  Person.fromJson(Map<String, dynamic> json) {
-    age = json['age'];
-    id = json['id'];
-    username = json['username'];
+  StudentUserNamePasswordCheckReqDTO.fromJson(Map<String, dynamic> json) {
+    password = json['password'];
+    userName = json['userName'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['age'] = this.age;
-    data['id'] = this.id;
-    data['username'] = this.username;
+    data['password'] = this.password;
+    data['userName'] = this.userName;
     return data;
   }
 }
 
 ///
-/// @desc UserAddress
+/// @desc TeacherUserNamePasswordCheckReqDTO
 ///
-class UserAddress {
-  String city;
-  String province;
-  String religion;
+class TeacherUserNamePasswordCheckReqDTO {
+  String password;
+  String userName;
 
-  UserAddress({
-    this.city,
-    this.province,
-    this.religion,
+  TeacherUserNamePasswordCheckReqDTO({
+    this.password,
+    this.userName,
   });
 
-  UserAddress.fromJson(Map<String, dynamic> json) {
-    city = json['city'];
-    province = json['province'];
-    religion = json['religion'];
+  TeacherUserNamePasswordCheckReqDTO.fromJson(Map<String, dynamic> json) {
+    password = json['password'];
+    userName = json['userName'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['city'] = this.city;
-    data['province'] = this.province;
-    data['religion'] = this.religion;
+    data['password'] = this.password;
+    data['userName'] = this.userName;
     return data;
   }
 }

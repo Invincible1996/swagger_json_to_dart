@@ -1,13 +1,6 @@
-import 'package:dio/dio.dart';
-
 ///
-/// @date: 2022/1/5 18:50
-/// @author: kevin
-/// @description: dart
 ///
-
-import 'package:dio/dio.dart';
-
+///
 class AppException implements Exception {
   final int code;
   final String message;

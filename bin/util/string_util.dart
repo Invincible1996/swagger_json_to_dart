@@ -9,29 +9,24 @@ extension StringUtils on String {
     return this.split("/")[2];
   }
 
-  ///
   /// @desc 获取实体类类型
-  ///
   String getDataTypeWithoutPrefix() {
     // return this.split("/")[2].split('.')[1];
     return this.split("/")[2];
   }
 
-  ///
   ///@desc 获取方法名称
-  ///
   String getFuncName() {
     var list = this.split('/');
     return list[list.length - 1];
   }
 
-  ///
   /// @desc 替换指定字符串 «string»
-  ///
   String replaceCharacter() {
     return this.replaceAll("«string»", '');
   }
 
+  ///
   String getDataTypeFromResponse() {
     if (this.contains("«")) {
       return this.split("«")[1].split("»")[0];
@@ -40,16 +35,12 @@ extension StringUtils on String {
     }
   }
 
-  ///
   /// @desc 首字母大写
-  ///
   String firstLetterUppercase() {
     return '${this.substring(0, 1).toUpperCase()}${this.substring(1)}';
   }
 
-  ///
   /// @desc 下划线替换并大些
-  ///
   String replaceLine() {
     if (this.contains("-")) {
       var list = this.split('-');
@@ -70,9 +61,7 @@ extension StringUtils on String {
     }
   }
 
-  ///
-  ///
-  ///
+  /// @desc
   String replaceClassName() {
     if (this.contains("«")) {
       return this.split("«")[0];
@@ -81,16 +70,12 @@ extension StringUtils on String {
     }
   }
 
-  ///
-  ///
-  ///
+  /// @desc
   String getDataTypeFromRef() {
     return this.split('/')[2];
   }
 
-  ///
   /// @desc 下划线替换并大些
-  ///
   String replaceUnderLine() {
     if (this.contains("_")) {
       var list = this.split('_');
@@ -120,22 +105,16 @@ extension StringUtils on String {
 
   String getResponseType(value) {
     String responseType;
-    Map<String, dynamic> resSchema =
-        value['post']['responses']['200']['schema'];
+    Map<String, dynamic> resSchema = value['post']['responses']['200']['schema'];
     if (resSchema.containsKey('allOf')) {
       //
-      responseType =
-          (resSchema['allOf'][1]['properties']['data']['\$ref'] as String)
-              .getDataTypeWithoutPrefix();
+      responseType = (resSchema['allOf'][1]['properties']['data']['\$ref'] as String).getDataTypeWithoutPrefix();
     } else {
-      if ((resSchema['\$ref'] as String).contains('string') ||
-          (resSchema['\$ref'] as String).contains('object')) {
+      if ((resSchema['\$ref'] as String).contains('string') || (resSchema['\$ref'] as String).contains('object')) {
         responseType = 'Result';
       } else {
         //
-        responseType = (resSchema['\$ref'] as String)
-            .getDataTypeWithoutPrefix()
-            .getDataTypeFromResponse();
+        responseType = (resSchema['\$ref'] as String).getDataTypeWithoutPrefix().getDataTypeFromResponse();
       }
     }
     return responseType ?? 'Null';

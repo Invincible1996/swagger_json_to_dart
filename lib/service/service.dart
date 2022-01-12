@@ -6,16 +6,16 @@ import './struct.dart';
 import 'base_controller.dart';
 import 'api_response.dart';
 
-///@desc HelloController
-class HelloController extends BaseController {
+///@desc StudentAccountController
+class StudentAccountController extends BaseController {
   ///
-  /// @path /hello/test
-  /// @desc test
-  Future<dynamic> test() async {
+  /// @path /studentAccount/checkUserNameAndPassword
+  /// @desc 学生账户名密码登录
+  Future<dynamic> checkUserNameAndPassword_1(
+      StudentUserNamePasswordCheckReqDTO input) async {
     try {
-      var res = await post(
-        '/hello/test',
-      );
+      var res = await post('/studentAccount/checkUserNameAndPassword',
+          data: input.toJson());
       var out = Result.fromJson(res.data['data']);
       return ApiResponse.completed(out, res.data['code'], res.data['message']);
     } catch (err) {
@@ -24,29 +24,34 @@ class HelloController extends BaseController {
   }
 }
 
-///@desc UserController
-class UserController extends BaseController {
+///@desc TeacherAccountController
+class TeacherAccountController extends BaseController {
   ///
-  /// @path /user/register
-  /// @desc 用户注册
-  Future<dynamic> register(Person input) async {
+  /// @path /teacherAccount/checkUserNameAndPassword
+  /// @desc 老师用户名密码校验
+  Future<dynamic> checkUserNameAndPassword_2(
+      TeacherUserNamePasswordCheckReqDTO input) async {
     try {
-      var res = await post('/user/register', data: input.toJson());
-      var out = LoginResVO.fromJson(res.data['data']);
+      var res = await post('/teacherAccount/checkUserNameAndPassword',
+          data: input.toJson());
+      var out = Result.fromJson(res.data['data']);
       return ApiResponse.completed(out, res.data['code'], res.data['message']);
     } catch (err) {
       return ApiResponse.error(err);
     }
   }
+}
 
+///@desc EmployeeAccountController
+class EmployeeAccountController extends BaseController {
   ///
-  /// @path /user/test
-  /// @desc test
-  Future<dynamic> test_1() async {
+  /// @path /employeeAccount/checkUserNameAndPassword
+  /// @desc 员工用户名密码校验
+  Future<dynamic> checkUserNameAndPassword(
+      EmployeeUserNamePasswordCheckReqDTO input) async {
     try {
-      var res = await post(
-        '/user/test',
-      );
+      var res = await post('/employeeAccount/checkUserNameAndPassword',
+          data: input.toJson());
       var out = Result.fromJson(res.data['data']);
       return ApiResponse.completed(out, res.data['code'], res.data['message']);
     } catch (err) {
